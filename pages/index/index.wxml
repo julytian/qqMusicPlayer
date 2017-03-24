@@ -1,0 +1,124 @@
+
+<!-- navbar -->
+<view class="navbar">
+  <text wx:for="{{navbar}}" data-index="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}
+  </text>
+</view>
+
+<!-- 推荐 -->
+<view class="recommend" hidden="{{currentTab!==0}}">
+
+  <!--S swiper 轮播-->
+  <swiper indicator-dots="true" autoplay="true" interval="3000" duration="500" class="swiper">
+    <block wx:for="{{slider}}" wx:key="unique">
+      <swiper-item data-id="{{item.id}}" data-url="{{item.linkUrl}}">
+        <image src="{{item.picUrl}}" class="img" />
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!--E swiper 轮播-->
+
+  <!--S 电台-->
+  <view class="channel">
+    <text class="title">电台</text>
+    <view class="list">
+      <view class="item" wx:for="{{radioList}}" wx:key="unique" data-id="{{item.radioid}}">
+        <view class="list-media">
+          <image class="img" src="{{item.picUrl}}"></image>
+        </view>
+        <text class="text">{{item.Ftitle}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!--E 电台-->
+
+  <!--S 热门歌单-->
+  <view class="channel">
+    <text class="title">热门歌单</text>
+    <view class="list">
+      <view class="item songitem" wx:for="{{songList}}" wx:key="unique" data-id="{{item.id}}" bindtap="cdlistTap">
+        <view class="list-media">
+          <image class="img" src="{{item.picUrl}}"></image>
+          <text class="list-count">{{item.accessnum}}</text>
+        </view>
+        <text class="text">{{item.songListDesc}}</text>
+        <text class="author">{{item.songListAuthor}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!--E 热门歌单-->
+</view>
+
+<!-- 排行榜 -->
+<view class="topList" hidden="{{currentTab!==1}}">
+  <view class="item" wx:for="{{topList}}" wx:key="unique" data-id="{{item.id}}" bindtap="toplistTap">
+    <view class="media">
+      <image class="img" src="{{item.picUrl}}"></image>
+      <text class="count">{{item.listenCount}}</text>
+    </view>
+    <view class="info">
+      <text class="title">{{item.topTitle}}</text>
+      <view class="text" wx:for="{{item.songList}}" wx:key="unique">{{index+1}}
+        <text>{{item.songname}}</text>- {{item.singername}}
+      </view>
+    </view>
+    <view class="arrow"></view>
+  </view>
+</view>
+
+<!-- 搜索 -->
+<view class="search" hidden="{{currentTab!==2}}">
+
+  <!-- 搜索框-->
+  <view class="search-bar">
+    <view class="search-wrap">
+      <view class="search-box">
+        <icon class="icon-search icon-search__in-box" type="search" size="14"></icon>
+        <input type="text" class="search-input" placeholder="搜索歌曲、歌单、专辑" value="{{searchKeyword}}" focus="{{inputShowed}}" bindinput="inputTyping" />
+        <view class="icon-clear" wx:if="{{inputShowed}}" bindtap="clearInput">
+          <icon type="clear" size="14"></icon>
+        </view>
+      </view>
+      <label class="search-label" hidden="{{inputShowed}}" bindtap="showInput">
+        <icon class="icon-search icon-search__in-label" type="search" size="14"></icon>
+        <view class="search-text">搜索歌曲、歌单、专辑</view>
+      </label>
+    </view>
+    <view class="search-btn" hidden="{{!inputShowed}}" bindtap="searchInput">搜索</view>
+  </view>
+
+  <!-- 热门搜索 -->
+  <view class="search-hot" hidden="{{inputShowed}}">
+    <text class="hot-title">热门搜索</text>
+    <view class="hot-wrap">
+      <text class="hot-item hot">{{special}}</text>
+      <text class="hot-item" wx:for="{{hotkey}}" wx:key="unique" data-text="{{item.k}}" bindtap="hotkeyTap">{{item.k}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-result" wx:if="{{searchSongList.length>0}}">
+    <scroll-view scroll-y="true" bindscrolltolower="searchScrollLower">
+      <view class="result-item" wx:if="{{zhida.type == 2}}">
+        <image class="media" src="https://y.gtimg.cn/music/photo_new/T001R68x68M000{{zhida.singermid}}.jpg"></image>
+        <text class="title">{{zhida.singername}}</text>
+        <view class="subtitle">
+          <text>单曲：{{zhida.songnum}}</text>
+          <text>专辑：{{zhida.albumnum}}</text>
+        </view>
+      </view>
+      <view class="result-item" wx:for="{{searchSongList}}" wx:key="unique" data-data="{{item}}" bindtap="playsongTap" data-id="{{item.songid}}" data-mid="{{item.songmid}}" data-albummid="{{item.albummid}}" data-from="searchlist">
+        <view class="icon{{item.isonly=='0' ? ' nocopyright' : ''}}"></view>
+        <text class="title">{{item.songname}}</text>
+        <view class="subtitle">
+          <text wx:for="{{item.singer}}" wx:key="unique">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view>
+      <view class="loading complete" hidden="{{!searchLoadingComplete}}">兄弟，真没有了</view>
+    </scroll-view>
+  </view>
+</view>

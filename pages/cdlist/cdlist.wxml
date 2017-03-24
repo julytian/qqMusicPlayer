@@ -1,0 +1,49 @@
+<view class="cdlist-wrapper" style="background-color:{{listBgColor}};">
+
+  <!-- header 部分 -->
+  <view class="cdlist-focus">
+    <view class="focus-body">
+      <view class="focus-info">
+        <view class="focus-text">
+          <scroll-view class="focus-tit" scroll-x="{{true}}">
+            <text>{{dissname}}</text>
+          </scroll-view>
+          <view class="focus-desc">{{visitnum}}人播放 来自： {{nickname}}</view>
+        </view>
+        <view class="focus-play"></view>
+      </view>
+    </view>
+    <view class="focus-bg" style="background-image: url({{focusBg}})"></view>
+    <view class="focus-gradient" style="background-image: -webkit-linear-gradient(top, transparent, {{listBgColor}} 80%);"></view>
+  </view>
+
+  <!-- 歌曲列表 -->
+  <view class="border_t cdlist-songs">
+    <view class="border_b songlist-item" wx:for="{{songlist}}" wx:key="unique" bindtap="playsongTap" data-data="{{item}}" data-no="{{index}}" data-id="{{item.id}}" data-mid="{{item.mid}}" data-albummid="{{item.album.mid}}" data-from="cdlist">
+      <view class="songlist-title">
+        {{item.title}}
+      </view>
+      <view class="songlist-desc">
+        <text wx:if="{{item.fnote!=0&& item.isonly == 0 }}" class="icon-earth"></text>
+        <view class="songlist-singer">
+          <text wx:for="{{item.singer}}" wx:for-item="singer" wx:key="unique">{{singer.name}}</text>
+        </view>
+        <text> · {{item.album.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 标签 -->
+  <view class="songlist-tit">
+    <text>标签</text>
+  </view>
+  <view class="songlist-tags__list">
+    <text class="tag-item" wx:for="{{songData.tags}}" wx:key="unique">{{item.name}}</text>
+  </view>
+  <view class="songlist-tit">
+    <text>简介</text>
+  </view>
+  <view class="songlist_summary">
+    <text>{{songData.desc}}</text>
+  </view>
+</view>

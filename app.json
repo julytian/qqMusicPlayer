@@ -1,0 +1,15 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/toplist/toplist",
+    "pages/playsong/playsong",
+    "pages/cdlist/cdlist"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#31c27c",
+    "navigationBarTitleText": "QQ音乐",
+    "navigationBarTextStyle": "#fff",
+    "enablePullDownRefresh": false
+  }
+}

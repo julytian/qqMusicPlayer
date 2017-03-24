@@ -1,0 +1,130 @@
+.toplist-focus {
+  position: relative;
+  overflow: hidden;
+}
+
+.focus-bg {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+}
+
+.focus-bg:after {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.focus-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 50% 30rpx 50rpx;
+  color: #fff;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  align-content: space-between;
+}
+
+.focus-text {
+  width: 85%;
+}
+
+.focus-tit {
+  display: block;
+  font-size: 48rpx;
+  white-space: nowrap;
+}
+
+.focus-desc {
+  display: block;
+  font-size: 28rpx;
+}
+
+
+.focus-play {
+  position: relative;
+  flex: 0 0 84rpx;
+  width: 84rpx;
+  height: 84rpx;
+  margin-left: 20rpx;
+  border: solid 6rpx;
+  border-radius: 999px;
+}
+
+.focus-play::before {
+  content: "";
+  position: absolute;
+  top: 26rpx;
+  left: 34rpx;
+  height: 0;
+  width: 0;
+  line-height: 999em;
+  overflow: hidden;
+  border-color: transparent transparent transparent currentColor;
+  border-width: 18rpx 30rpx;
+  border-style: solid;
+}
+
+.song-list {
+  background: #000;
+}
+
+.song-item {
+  display: flex;
+  font-size: 36rpx;
+  color: #fff;
+  padding-left: 20rpx;
+}
+
+.song-number {
+  flex: none;
+  display: block;
+  margin-right: 20rpx;
+  padding-top: 10rpx;
+  width: 60rpx;
+  text-align: center;
+}
+
+.song-body {
+  position: relative;
+  flex: auto;
+  padding: 10rpx 30rpx 10rpx 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+.song-tit, .song-desc {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-tit {
+  display: block;
+}
+
+.song-desc {
+  display: block;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28rpx;
+}
+
+.song-desc text:not(:first-of-type):not(:last-of-type):before {
+  content: '/';
+  margin: 0 8rpx;
+}
+
+.song-list.light .song-item {
+  color: #000;
+}
+
+.song-list.light .song-desc {
+  color: grey;
+}
+
+.song-list.light .song-body {
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}

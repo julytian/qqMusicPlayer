@@ -1,0 +1,84 @@
+<view class="song-wrap">
+  <view class="song-main">
+
+    <!-- 歌曲信息-->
+    <view class="song-info">
+      <image class="avatar-img" src="{{songImg}}"></image>
+      <view class="song-info__con">
+
+        <!-- 歌名 -->
+        <scroll-view class="song-name" scroll-x="true" style="width: 100%">
+          <view>{{playsong.title}}</view>
+        </scroll-view>
+        <view class="singer-name">
+          <text class="singer-name__text" wx:for="{{playsong.singer}}" wx:key="unique">{{item.name}}</text>
+        </view>
+      </view>
+      <view class="play {{isPlaying ? '' : 'pause'}}" bindtap="songToggle"></view>
+    </view>
+
+    <!-- 歌词 -->
+    <view class="song-lyric" style="height:{{lyricSwiperH}}px;">
+      <swiper class="song-lyric__swiper" indicator-dots="{{false}}" autoplay="{{false}}" duration="500" bindchange="swiperChange" style="height:{{lyricSwiperH}}px;">
+
+        <!-- 歌词展示 -->
+        <swiper-item class="swiper-item">
+          <scroll-view scroll-y="true" style="height: 100%;" scroll-top="{{scrollTop}}" bindscroll="scrollHandle">
+            <view class="lyric-item" wx:for="{{lyric}}" wx:for-item="word" wx:key="unique">
+              <text wx:if="{{word.length>0}}">
+                {{word}}
+              </text>
+            </view>
+            <view class="lyric-item" wx:if="{{lyric.length<0}}">
+              <text>歌词努力加载中~~~~~ </text>
+            </view>
+          </scroll-view>
+        </swiper-item>
+
+        <!-- 播放队列 -->
+        <swiper-item class="swiper-item" wx:if="{{hasSonglists}}">
+          <scroll-view scroll-y="true" style="height: 100%;">
+            <view class="songlists-tit">
+              播放队列
+              <text class="songlists-count">({{songlists.length}}首)</text>
+            </view>
+            <view class="songlists-item {{index==selectedIndex?'songlists-item__current':''}}" wx:for="{{songlists}}" wx:key="unique" wx:for-item="song" data-index="{{index}}" bindtap="changeSong">
+              <text class="play-list__song">{{song.title}}</text>
+              <text class="play-list__line">-</text>
+              <view class="play-list__singer">
+                <text wx:for="{{song.singer}}" wx:for-item="singer" wx:key="unique">{{singer.name}}</text>
+              </view>
+              <view class="ani_playing" wx:if="{{index==selectedIndex}}">
+                <text></text>
+                <text></text>
+                <text></text>
+                <text></text>
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </swiper>
+
+      <!-- 小圆点-->
+      <view class="swipe-btn-wrapper" wx:if="{{hasSonglists}}">
+        <view class="swipe-btn-list">
+          <view class="{{dotsClass[0]}}"></view>
+          <view class="{{dotsClass[1]}}"></view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 控制条 -->
+    <view class="song-control">
+      <view class="progress">
+        <text class="time-start">{{songState.currentPosition}}</text>
+        <view class="time-bar">
+          <view class="time-play" style="transform: translateX({{songState.progress}}%)"></view>
+        </view>
+        <text class="time-total">{{songState.duration}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="song-bg" style="background-image:url({{songImg}})">
+  </view>
+</view>
