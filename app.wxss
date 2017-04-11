@@ -1,8 +1,5 @@
-
-
 page{
 	color: #555;
-	/*font: 32rpx/1.5 "hiragino sans gb",arial;*/
   font: 32rpx/1.5 FZLTXIHJW--GB1-0,"hiragino sans gb","Helvetica Neue",Helvetica,STHeiTi,Arial,sans-serif;
 	background: #f4f4f4;
 }

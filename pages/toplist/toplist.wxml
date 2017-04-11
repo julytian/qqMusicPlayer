@@ -1,10 +1,8 @@
-<view class="toplist-focus">
+<view class="toplist-focus" wx:if="{{songlist.length>0}}">
   <view class="focus-bg" style="background-image: url({{topinfo.pic_album}})"></view>
   <view class="focus-info">
     <view class="focus-text">
-
-      <!--<text class="focus-tit">{{topinfo.ListName}}</text>-->
-      <scroll-view class="focus-tit" scroll-x="{{true}}">
+      <scroll-view class="focus-tit" scroll-x="{{true}}" scroll-with-animation="{{true}}" style="height:30px;">
         <text>{{topinfo.ListName}}</text>
       </scroll-view>
       <text class="focus-desc">{{update_time}} 更新</text>

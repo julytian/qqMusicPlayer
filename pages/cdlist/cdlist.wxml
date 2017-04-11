@@ -1,4 +1,4 @@
-<view class="cdlist-wrapper" style="background-color:{{listBgColor}};">
+<view class="cdlist-wrapper" style="background-color:{{listBgColor}};" wx:if="{{songlist.length>0}}">
 
   <!-- header 部分 -->
   <view class="cdlist-focus">

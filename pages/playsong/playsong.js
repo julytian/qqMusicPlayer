@@ -1,5 +1,6 @@
 var app = getApp();
 var util = require('../../utils/util.js');
+var that;
 Page({
   data: {
     playsong: null,
@@ -17,13 +18,15 @@ Page({
     hasSonglists: true,
     lyricSwiperH: 400,
     lyric: null,
-    dotsClass: ['on', ''],
+    dotsClass: [
+      'on', ''
+    ],
     songFrom: 0,
     scrollTop: 0
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
-    var that = this;
+    that = this;
     var songlists = app.globalData.songlists;
     var songdata = app.globalData.songData;
 
@@ -34,15 +37,10 @@ Page({
     var mid = options.mid;
     var albummid = options.albummid;
 
-    that.setData({
-      songFrom: options.songFrom,
-      songTitle: songdata.title
-    })
+    that.setData({songFrom: options.songFrom, songTitle: songdata.title})
 
     if (options.songFrom === 'searchlist') {
-      that.setData({
-        hasSonglists: false
-      });
+      that.setData({hasSonglists: false});
     }
     if (options.songFrom === 'toplist') {
       for (var i = 0, len = songlists.length; i < len; i++) {
@@ -51,10 +49,7 @@ Page({
         arr[i] = songlists[i].data;
       }
       songlists = arr;
-      that.setData({
-        songlists: arr
-      });
-
+      that.setData({songlists: arr});
     }
 
     // 设置lyric-swiper的高度
@@ -69,39 +64,29 @@ Page({
     that.changeOption(index, id, mid, albummid, songlists);
 
   },
+  onReady: function () {
+    // 使用后台播放器播放音乐
+    wx.playBackgroundAudio({dataUrl: that.data.songUrl, title: that.data.songTitle, coverImgUrl: that.data.songImg});
+    this.startPlay();
+  },
   // 修改配置
   changeOption: function (index, id, mid, albummid, songlists) {
-    var that = this;
-
+    // 调用showapi站点的音乐歌词
+    that.getLyric(id);
     // 获取歌曲信息
     util.getSongInfo(id, mid, function (data) {
-      that.setData({
-        playsong: data[0]
-      });
+      that.setData({playsong: data[0]});
     });
-
     that.setData({
       selectedIndex: index,
       songlists: songlists,
       songUrl: 'http://ws.stream.qqmusic.qq.com/C100' + mid + '.m4a?fromtag=38',
       songImg: 'http://y.gtimg.cn/music/photo_new/T002R150x150M000' + albummid + '.jpg'
     });
-    // 调用showapi站点的音乐歌词
-    that.getLyric(id);
-    // 使用后台播放器播放音乐
-    wx.playBackgroundAudio({
-      dataUrl: that.data.songUrl,
-      title: that.data.songTitle,
-      coverImgUrl: that.data.songImg
-    });
   },
-  onReady: function () {
-    this.startPlay();
-
-  },
+  
   // 开始播放
   startPlay: function () {
-    var that = this;
     // 页面渲染完成
     that.songPlay();
     // 监听音乐播放
@@ -110,19 +95,17 @@ Page({
     });
   },
   // 歌词滚动
-  scrollHandle:function(){
-
-  },
+  scrollHandle: function () {},
   // 获取歌词
   getLyric: function (id) {
-    var that = this;
-    util.getLyric(id, function (data) {
-      var lyric = that.reconvert(data.showapi_res_body.lyric).slice(4);
-      lyric = that.parseLyric(lyric);
-      that.setData({
-        lyric: lyric
-      })
-    });
+    util
+      .getLyric(id, function (data) {
+        var lyric = that
+          .reconvert(data.showapi_res_body.lyric)
+          .slice(4);
+        lyric = that.parseLyric(lyric);
+        that.setData({lyric: lyric})
+      });
   },
   // 解码>>中文
   reconvert: function (str) {
@@ -135,7 +118,6 @@ Page({
     str = str.replace(/(&#)(\d{1,6});/gi, function ($0) {
       return String.fromCharCode(parseInt(escape($0).replace(/(%26%23)(\d{1,6})(%3B)/g, "$2")));
     });
-
     return str;
   },
   // 解析歌词的方法
@@ -146,7 +128,8 @@ Page({
       var lyric = decodeURIComponent(lyrics[i]);
       var timeReg = /\[\d*:\d*((\.|\:)\d*)*\]/g;
       var timeRegExpArr = lyric.match(timeReg);
-      if (!timeRegExpArr) continue;
+      if (!timeRegExpArr) 
+        continue;
       var clause = lyric.replace(timeReg, '');
       if (clause.length > 0) {
         for (var k = 0, h = timeRegExpArr.length; k < h; k++) {
@@ -163,14 +146,17 @@ Page({
   // 转换时间格式
   timeToString: function (duration) {
     var str = '';
-    var minute = parseInt(duration / 60) < 10 ? ('0' + parseInt(duration / 60)) : (parseInt(duration / 60));
-    var second = duration % 60 < 10 ? ('0' + duration % 60) : (duration % 60);
+    var minute = parseInt(duration / 60) < 10
+      ? ('0' + parseInt(duration / 60))
+      : (parseInt(duration / 60));
+    var second = duration % 60 < 10
+      ? ('0' + duration % 60)
+      : (duration % 60);
     str = minute + ':' + second;
     return str;
   },
   // 播放状态控制
   songPlay: function () {
-    var that = this;
     clearInterval(timer);
     var timer = setInterval(function () {
       // 获取后台音乐播放状态
@@ -188,9 +174,7 @@ Page({
             });
 
           } else {
-            that.setData({
-              isPlaying: false
-            });
+            that.setData({isPlaying: false});
             clearInterval(timer);
           }
         }
@@ -200,26 +184,13 @@ Page({
 
   // 切换播放状态按钮
   songToggle: function () {
-    var that = this;
     if (that.data.isPlaying) {
       wx.pauseBackgroundAudio();
     } else {
-      wx.playBackgroundAudio({
-        title: that.data.playsong.title,
-        coverImgUrl: that.data.songImg
-      });
-       that.songPlay();
+      wx.playBackgroundAudio({title: that.data.playsong.title, coverImgUrl: that.data.songImg});
+      that.songPlay();
     };
-   
-  },
-  // 修改swiper 点样式
-  swiperChange: function (ev) {
-    var that = this;
-    var dotsClass = ['', ''];
-    dotsClass[ev.detail.current] = 'on';
-    that.setData({
-      dotsClass: dotsClass
-    });
+
   },
   // 改变播放歌曲
   changeSong: function (ev) {
@@ -239,20 +210,19 @@ Page({
       var albummid = currentData.album.mid;
     }
 
-    that.setData({
-      songTitle: currentData.title
-    });
+    that.setData({songTitle: currentData.title});
 
     that.changeOption(currentIndex, id, mid, albummid, songlists);
-    wx.seekBackgroundAudio({
-      position: 0
-    });
+    wx.seekBackgroundAudio({position: 0});
     that.startPlay();
     // 使用后台播放器播放音乐
-    wx.playBackgroundAudio({
-      dataUrl: that.data.songUrl,
-      title: that.data.songTitle,
-      coverImgUrl: that.data.songImg
-    });
+    wx.playBackgroundAudio({dataUrl: that.data.songUrl, title: that.data.songTitle, coverImgUrl: that.data.songImg});
+  },
+  // 修改swiper 点样式
+  swiperChange: function (ev) {
+    var that = this;
+    var dotsClass = ['', ''];
+    dotsClass[ev.detail.current] = 'on';
+    that.setData({dotsClass: dotsClass});
   }
 })

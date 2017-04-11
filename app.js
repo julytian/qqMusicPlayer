@@ -1,7 +1,5 @@
+//app.js
 App({
-  onLaunch: function () {
-    // String1
-  },
   globalData:{
     songData:null,
     songLists:null

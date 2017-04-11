@@ -60,7 +60,7 @@ function getHotSearch(callback) {
     data: {
       g_tk: 5381,
       uin: 0,
-      format: 'json',
+      format: 'jsonp',
       inCharset: 'utf-8',
       outCharset: 'utf-8',
       notice: 0,
