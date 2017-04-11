@@ -1,7 +1,22 @@
-# qqMusicPlayer
+## 来源
 微信小程序版QQ音乐--源自[QQ音乐h5](https://m.y.qq.com/)
 
-[gif图地址](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif):  ![QQmusicPlayer](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif)
+歌词来源-[showapi](https://www.showapi.com/api/lookPoint/213)
+
+## 已做
+- [x] [推荐]
+- [x] [排行榜]
+- [x] [搜索]
+- [x] [热门歌单]
+- [x] [播放列表]
+- [x] [歌词]
+
+## todo
+* 歌词滚动
+
+## 效果
+
+[gif图地址](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif):  ![QQmusicPlayer](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif)
 
 ![](http://7xo0zm.com1.z0.glb.clouddn.com/1.jpg)
 
