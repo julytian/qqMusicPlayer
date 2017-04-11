@@ -1,7 +1,7 @@
 # qqMusicPlayer
 微信小程序版QQ音乐--源自[QQ音乐h5](https://m.y.qq.com/)
 
-![QQmusicPlayer](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif)
+[gif图地址](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif):  ![QQmusicPlayer](http://7xo0zm.com1.z0.glb.clouddn.com/QQ%E9%9F%B3%E4%B9%903.gif)
 
 ![](http://7xo0zm.com1.z0.glb.clouddn.com/1.jpg)
 
