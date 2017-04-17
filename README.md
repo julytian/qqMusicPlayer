@@ -1,3 +1,6 @@
+## 发表在微信小程序联盟
+[地址](http://www.wxapp-union.com/forum.php?mod=viewthread&tid=4300)
+
 ## 来源
 微信小程序版QQ音乐--源自[QQ音乐h5](https://m.y.qq.com/)
 
