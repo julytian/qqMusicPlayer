@@ -254,5 +254,13 @@ Page({
     wx.navigateTo({
       url: '../playsong/playsong?id=' + id + '&mid=' + mid + "&albummid=" + albummid + '&songFrom=' + songFrom
     });
+  },
+  onShareAppMessage: function() {
+    // 用户点击右上角分享
+    return {
+      title: 'QQ音乐，陪伴你每一天', // 分享标题
+      desc: '这是julytian制作的QQ音乐微信小程序', // 分享描述
+      path: '/pages/index/index' // 分享路径
+    }
   }
 });
