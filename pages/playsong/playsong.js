@@ -184,12 +184,28 @@ Page({
 
   // 切换播放状态按钮
   songToggle: function () {
-    if (that.data.isPlaying) {
-      wx.pauseBackgroundAudio();
-    } else {
-      wx.playBackgroundAudio({title: that.data.playsong.title, coverImgUrl: that.data.songImg});
+     wx.getBackgroundAudioPlayerState({
+       success: function(res){
+         var status = res.status;
+         // 播放中
+         if(status==1){
+          wx.pauseBackgroundAudio();
+         }else if(status==0){ // 暂停中
+          wx.playBackgroundAudio({
+            title: that.data.playsong.title, 
+            coverImgUrl: that.data.songImg,
+            dataUrl: that.data.songUrl
+          });
       that.songPlay();
-    };
+         }
+       }
+     });
+    // if (that.data.isPlaying) {
+    //   wx.pauseBackgroundAudio();
+    // } else {
+    //   wx.playBackgroundAudio({title: that.data.playsong.title, coverImgUrl: that.data.songImg});
+    //   that.songPlay();
+    // };
 
   },
   // 改变播放歌曲
