@@ -38,3 +38,7 @@
 ![](http://7xo0zm.com1.z0.glb.clouddn.com/6.jpg)
 
 ![](http://7xo0zm.com1.z0.glb.clouddn.com/7.jpg)
+
+# licence
+
+MIT
