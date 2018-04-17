@@ -1,3 +1,6 @@
+## 抱歉
+QQ音乐很多接口已经修改，暂时无法跑通了，新的版本后续会更新，抱歉
+
 ## 发表在微信小程序联盟
 [地址](http://www.wxapp-union.com/forum.php?mod=viewthread&tid=4300)
 
